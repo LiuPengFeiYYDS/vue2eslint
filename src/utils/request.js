@@ -1,10 +1,10 @@
 import axios from 'axios'
-const http = axios.create({
+const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 })
 // 请求拦截
-http.interceptors.request.use(
+service.interceptors.request.use(
   (config) => {
     return config
   },
@@ -13,7 +13,7 @@ http.interceptors.request.use(
   }
 )
 // 响应拦截
-http.interceptors.response.use(
+service.interceptors.response.use(
   (res) => {
     return res
   },
@@ -27,6 +27,6 @@ const request = (option) => {
   if (option.method.toLowerCase() === 'get') {
     option.params = option.data || {}
   }
-  return http(option)
+  return service(option)
 }
 export default request
